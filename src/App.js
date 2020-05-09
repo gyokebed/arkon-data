@@ -8,12 +8,14 @@ function App() {
   return (
     <React.Fragment>
       <NavBar />
-      <Switch>
-        <Route path="/tasks" component={Tasks} />
-        <Route path="/not-found" component={NotFound} />
-        <Redirect from="/" exact to="/tasks" />
-        <Redirect to="/not-found" />
-      </Switch>
+      <main className="container">
+        <Switch>
+          <Route path="/tasks" component={Tasks} />
+          <Route path="/not-found" component={NotFound} />
+          <Redirect from="/" exact to="/tasks" />
+          <Redirect to="/not-found" />
+        </Switch>
+      </main>
     </React.Fragment>
   );
 }
