@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { getRanges } from "../services/fakeRangesService";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
+  const [ranges, setRanges] = useState([]);
 
   useEffect(() => {
     console.log("useEffect has been called!");
@@ -10,21 +12,22 @@ const Tasks = () => {
       { name: "Limpiar la casa", tiempo: "1 hora" },
       { name: "Hacer ejercicio", tiempo: "1 hora y media" },
     ]);
+
+    setRanges([{ _id: "", name: "Todas" }, ...getRanges()]);
   }, []);
-  console.log(tasks);
+  console.log(ranges);
   return (
     <React.Fragment>
       <div className="row">
         <div className="col-3">
-          <ul class="list-group">
-            <li class="list-group-item active">Todas las tareas</li>
-            <li class="list-group-item">Duración Corta</li>
-            <li class="list-group-item">Duración Media</li>
-            <li class="list-group-item">Duración Larga</li>
+          <ul className="list-group">
+            {ranges.map((range) => (
+              <li className="list-group-item">{range.name}</li>
+            ))}
           </ul>
         </div>
         <div className="col">
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
