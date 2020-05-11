@@ -2,16 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Table from "./common/table";
 
-const TasksTable = () => {
+const TasksTable = ({ tasks }) => {
   const columns = [
     {
       path: "title",
-      label: "Title",
+      label: "Titulo",
       content: (task) => <Link to={`/tasks/`}>{}</Link>,
     },
+    { path: "description", label: "Descripción" },
+    { path: "range.name", label: "Rango de duración" },
   ];
 
-  return <Table />;
+  return <Table columns={columns} data={tasks} />;
 };
 
 export default TasksTable;

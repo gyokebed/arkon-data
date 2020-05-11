@@ -1,13 +1,13 @@
 import React from "react";
 
-const TableHeader = () => {
+const TableHeader = ({ columns }) => {
+  console.log(columns);
   return (
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        {columns.map((column) => (
+          <th key={column.path}>{column.label}</th>
+        ))}
       </tr>
     </thead>
   );

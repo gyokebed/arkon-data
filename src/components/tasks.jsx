@@ -17,14 +17,15 @@ const Tasks = () => {
 
     setRanges([{ _id: "", name: "Todas" }, ...getRanges()]);
   }, []);
-  console.log(ranges);
   return (
     <React.Fragment>
       <div className="row">
         <div className="col-3">
           <ul className="list-group">
             {ranges.map((range) => (
-              <li className="list-group-item">{range.name}</li>
+              <li className="list-group-item" key={range._id}>
+                {range.name}
+              </li>
             ))}
           </ul>
         </div>
@@ -36,7 +37,7 @@ const Tasks = () => {
           >
             Agregar Tarea
           </Link>
-          <TasksTable />
+          <TasksTable tasks={tasks} />
         </div>
       </div>
     </React.Fragment>

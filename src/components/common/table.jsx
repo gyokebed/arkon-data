@@ -2,10 +2,10 @@ import React from "react";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 
-const Table = () => {
+const Table = ({ columns, data }) => {
   return (
     <table className="table">
-      <TableHeader />
+      <TableHeader columns={columns} />
       <TableBody />
     </table>
   );
