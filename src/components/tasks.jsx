@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getTasks } from "../services/fakeTasksService";
 import { getRanges } from "../services/fakeRangeService";
 import TasksTable from "./tasksTable";
+import ListGroup from "./common/listGroup";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -18,13 +19,7 @@ const Tasks = () => {
     <React.Fragment>
       <div className="row">
         <div className="col-3">
-          <ul className="list-group">
-            {ranges.map((range) => (
-              <li className="list-group-item" key={range._id}>
-                {range.name}
-              </li>
-            ))}
-          </ul>
+          <ListGroup ranges={ranges} />
         </div>
         <div className="col">
           <Link
