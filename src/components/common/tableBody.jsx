@@ -2,7 +2,6 @@ import React from "react";
 import _ from "lodash";
 
 const TableBody = ({ columns, data }) => {
-  console.log(data);
   const renderCell = (item, column) => {
     if (column.content) return column.content(item);
 

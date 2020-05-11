@@ -1,11 +1,17 @@
 import React from "react";
 
-const ListGroup = ({ ranges }) => {
+const ListGroup = ({ items, selectedItem, onItemSelect }) => {
   return (
     <ul className="list-group">
-      {ranges.map((range) => (
-        <li className="list-group-item" key={range._id}>
-          {range.name}
+      {items.map((item) => (
+        <li
+          onClick={() => onItemSelect(item)}
+          key={item._id}
+          className={
+            item === selectedItem ? "list-group-item active" : "list-group-item"
+          }
+        >
+          {item.name}
         </li>
       ))}
     </ul>

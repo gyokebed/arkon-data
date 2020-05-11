@@ -1,7 +1,6 @@
 import React from "react";
 
 const TableHeader = ({ columns }) => {
-  console.log(columns);
   return (
     <thead>
       <tr>
