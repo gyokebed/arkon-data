@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTasks } from "../services/fakeTasksService";
+import { getTasks, deleteTask } from "../services/fakeTasksService";
 import { getRanges } from "../services/fakeRangeService";
 import TasksTable from "./tasksTable";
 import ListGroup from "./common/listGroup";
@@ -26,6 +26,12 @@ const Tasks = () => {
   const handleSearch = (query) => {
     setSearchQuery(query);
     setSelectedRange(null);
+  };
+
+  const handleDelete = (task) => {
+    setTasks(tasks.filter((t) => t._id !== task._id));
+
+    deleteTask(task._id);
   };
 
   const getData = () => {
@@ -61,7 +67,7 @@ const Tasks = () => {
           >
             Agregar Tarea
           </Link>
-          <TasksTable tasks={filteredData} />
+          <TasksTable tasks={filteredData} onDelete={handleDelete} />
         </div>
       </div>
     </React.Fragment>
