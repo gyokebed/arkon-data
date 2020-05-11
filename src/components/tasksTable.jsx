@@ -7,7 +7,7 @@ const TasksTable = ({ tasks }) => {
     {
       path: "title",
       label: "Titulo",
-      content: (task) => <Link to={`/tasks/`}>{}</Link>,
+      content: (task) => <Link to={`/tasks/${task._id}`}>{task.title}</Link>,
     },
     { path: "description", label: "Descripción" },
     { path: "range.name", label: "Rango de duración" },

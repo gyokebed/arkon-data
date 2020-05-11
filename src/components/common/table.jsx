@@ -6,7 +6,7 @@ const Table = ({ columns, data }) => {
   return (
     <table className="table">
       <TableHeader columns={columns} />
-      <TableBody />
+      <TableBody columns={columns} data={data} />
     </table>
   );
 };

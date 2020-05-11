@@ -1,26 +1,27 @@
 import React from "react";
+import _ from "lodash";
 
-const TableBody = () => {
+const TableBody = ({ columns, data }) => {
+  console.log(data);
+  const renderCell = (item, column) => {
+    if (column.content) return column.content(item);
+
+    return _.get(item, column.path);
+  };
+
+  const createKey = (item, column) => {
+    return item._id + (column.path || column.key);
+  };
+
   return (
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
+      {data.map((item) => (
+        <tr key={item._id}>
+          {columns.map((column) => (
+            <td key={createKey(item, column)}>{renderCell(item, column)}</td>
+          ))}
+        </tr>
+      ))}
     </tbody>
   );
 };

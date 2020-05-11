@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getTasks } from "../services/fakeTasksService";
 import { getRanges } from "../services/fakeRangeService";
 import TasksTable from "./tasksTable";
 
@@ -8,12 +9,8 @@ const Tasks = () => {
   const [ranges, setRanges] = useState([]);
 
   useEffect(() => {
-    console.log("useEffect has been called!");
-
-    setTasks([
-      { name: "Limpiar la casa", tiempo: "1 hora" },
-      { name: "Hacer ejercicio", tiempo: "1 hora y media" },
-    ]);
+    // console.log("useEffect has been called!");
+    setTasks(getTasks());
 
     setRanges([{ _id: "", name: "Todas" }, ...getRanges()]);
   }, []);
