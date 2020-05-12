@@ -1,15 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTasks, deleteTask } from "../services/fakeTasksService";
+import { getTasks, deleteTask, saveTasks } from "../services/fakeTasksService";
 import { getRanges } from "../services/fakeRangeService";
-import TasksTable from "./tasksTable";
 import ListGroup from "./common/listGroup";
+import TableHeader from "./common/tableHeader";
+import _ from "lodash";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import arrayMove from "array-move";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [ranges, setRanges] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRange, setSelectedRange] = useState(null);
+
+  const columns = [
+    {
+      path: "title",
+      label: "Titulo",
+      content: (task) => <Link to={`/tasks/${task._id}`}>{task.title}</Link>,
+    },
+    { path: "description", label: "Descripción" },
+    { path: "range.name", label: "Rango de duración" },
+    {
+      key: "delete",
+      content: (task) => (
+        <button
+          onClick={() => handleDelete(task)}
+          className="btn btn-danger btn-sm"
+        >
+          Eliminar
+        </button>
+      ),
+    },
+  ];
 
   useEffect(() => {
     // console.log("useEffect has been called!");
@@ -19,6 +43,7 @@ const Tasks = () => {
   }, []);
 
   const handleRangeSelect = (range) => {
+    console.log(range);
     setSelectedRange(range);
     setSearchQuery("");
   };
@@ -47,6 +72,57 @@ const Tasks = () => {
     return filtered;
   };
 
+  const SortableItem = SortableElement(({ item, columns }) => {
+    return (
+      <tr key={item._id}>
+        {columns.map((column) => {
+          return (
+            <td key={createKey(item, column)}>{renderCell(item, column)}</td>
+          );
+        })}
+      </tr>
+    );
+  });
+
+  const SortableList = SortableContainer(({ data, columns }) => {
+    return (
+      <tbody>
+        {data.map((item, index) => {
+          return (
+            <SortableItem
+              item={item}
+              columns={columns}
+              index={index}
+              key={`item-${item.title}`}
+            />
+          );
+        })}
+      </tbody>
+    );
+  });
+
+  const renderCell = (item, column) => {
+    if (column.content) return column.content(item);
+
+    return _.get(item, column.path);
+  };
+
+  const createKey = (item, column) => {
+    return item._id + (column.path || column.key);
+  };
+
+  const SortableComponent = ({ columns, data }) => {
+    const onSortEnd = ({ oldIndex, newIndex }) => {
+      console.log({ oldIndex, newIndex });
+      let itemsCopy = [...data];
+      itemsCopy = arrayMove(itemsCopy, oldIndex, newIndex);
+      setTasks(itemsCopy);
+      saveTasks(itemsCopy);
+    };
+
+    return <SortableList data={data} columns={columns} onSortEnd={onSortEnd} />;
+  };
+
   const filteredData = getData();
 
   return (
@@ -67,7 +143,11 @@ const Tasks = () => {
           >
             Agregar Tarea
           </Link>
-          <TasksTable tasks={filteredData} onDelete={handleDelete} />
+
+          <table className="table">
+            <TableHeader columns={columns} />
+            <SortableComponent columns={columns} data={filteredData} />
+          </table>
         </div>
       </div>
     </React.Fragment>

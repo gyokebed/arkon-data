@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import arrayMove from "array-move";
+import {
+  saveTasks,
+  setRanges,
+  getTasks,
+} from "../../services/fakeTasksService";
 
 const SortableItem = SortableElement(({ item, columns }) => {
   return (
@@ -44,37 +49,25 @@ const createKey = (item, column) => {
 
 // SortableComponent
 const TableBody = ({ columns, data }) => {
-  const [tasks, setTasks] = useState([
-    {
-      _id: "5b21ca3eeb7f6fbccd471815",
-      title: "Email",
-      description: "Responder email a cliente de China",
-      range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
-    },
-    {
-      _id: "5b21ca3eeb7f6fbccd471816",
-      title: "Usuario",
-      description: "Agregar nuevos usuario a la plataforma",
-      range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
-    },
-    {
-      _id: "5b21ca3eeb7f6fbccd471817",
-      title: "Feature 1",
-      description: "Resolver feature 1",
-      range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
-    },
-  ]);
+  // const [items, setItems] = useState([]);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     console.log({ oldIndex, newIndex });
-    let tasksCopy = [...tasks];
-    tasksCopy = arrayMove(tasksCopy, oldIndex, newIndex);
-    setTasks(tasksCopy);
+    let itemsCopy = [...data];
+    itemsCopy = arrayMove(itemsCopy, oldIndex, newIndex);
+    // setItems(itemsCopy);
+    saveTasks(itemsCopy);
   };
 
-  console.log(tasks);
+  // useEffect(() => {
+  //   // console.log("useEffect has been called!");
+  //   setItems(data);
+  // });
 
-  return <SortableList data={tasks} columns={columns} onSortEnd={onSortEnd} />;
+  // saveTasks(data);
+  console.log(data);
+
+  return <SortableList data={data} columns={columns} onSortEnd={onSortEnd} />;
 };
 
 export default TableBody;

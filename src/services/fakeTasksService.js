@@ -1,6 +1,6 @@
 import * as rangesAPI from "./fakeRangeService";
 
-const tasks = [
+let tasks = [
   {
     _id: "5b21ca3eeb7f6fbccd471815",
     title: "Email",
@@ -77,6 +77,11 @@ export function saveTask(task) {
   }
 
   return taskInDb;
+}
+
+export function saveTasks(items) {
+  tasks = [...items];
+  return tasks;
 }
 
 export function deleteTask(id) {
