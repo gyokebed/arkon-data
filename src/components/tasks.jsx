@@ -8,7 +8,7 @@ import _ from "lodash";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import arrayMove from "array-move";
 
-const Tasks = () => {
+const Tasks = ({ history }) => {
   const [tasks, setTasks] = useState([]);
   const [ranges, setRanges] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,10 +18,17 @@ const Tasks = () => {
     {
       path: "title",
       label: "Titulo",
-      content: (task) => <Link to={`/tasks/${task._id}`}>{task.title}</Link>,
     },
     { path: "description", label: "Descripción" },
     { path: "range.name", label: "Rango de duración" },
+    {
+      key: "editar",
+      content: (task) => (
+        <button onClick={() => handleEdit(task)} className="btn btn-sm">
+          Editar
+        </button>
+      ),
+    },
     {
       key: "delete",
       content: (task) => (
@@ -57,6 +64,10 @@ const Tasks = () => {
     setTasks(tasks.filter((t) => t._id !== task._id));
 
     deleteTask(task._id);
+  };
+
+  const handleEdit = (task) => {
+    history.push(`/tasks/${task._id}`);
   };
 
   const getData = () => {
