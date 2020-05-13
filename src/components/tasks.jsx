@@ -80,7 +80,10 @@ const Tasks = ({ history }) => {
         t.title.toLowerCase().startsWith(searchQuery.toLocaleLowerCase())
       );
     else if (selectedRange && selectedRange._id)
-      filtered = allTasks.filter((t) => t.range._id === selectedRange._id);
+      filtered = allTasks.filter(
+        (t) => t.range._id === selectedRange._id && !t.completed
+      );
+    else filtered = allTasks.filter((t) => !t.completed);
 
     return filtered;
   };
@@ -98,16 +101,19 @@ const Tasks = ({ history }) => {
   });
 
   const SortableList = SortableContainer(({ data, columns }) => {
+    // Returns the task if is not finished or in progress
     return (
       <tbody>
         {data.map((item, index) => {
-          return (
+          return !item.completed ? (
             <SortableItem
               item={item}
               columns={columns}
               index={index}
               key={`item-${item.title}`}
             />
+          ) : (
+            ""
           );
         })}
       </tbody>
@@ -126,7 +132,6 @@ const Tasks = ({ history }) => {
 
   const SortableComponent = ({ columns, data }) => {
     const onSortEnd = ({ oldIndex, newIndex }) => {
-      console.log({ oldIndex, newIndex });
       let itemsCopy = [...data];
       itemsCopy = arrayMove(itemsCopy, oldIndex, newIndex);
       setTasks(itemsCopy);

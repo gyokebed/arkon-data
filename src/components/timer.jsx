@@ -2,7 +2,7 @@ import React from "react";
 
 class ClockContainer extends React.Component {
   state = {
-    currentTime: this.props.data[0].mins,
+    currentTime: 0,
     intervalId: null,
     expired: false,
   };
@@ -15,9 +15,18 @@ class ClockContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.data);
     if (prevProps.data !== this.props.data) {
-      const mins = this.props.data[0].mins;
-      const secs = this.props.data[0].secs;
+      // Checks if array has task elements and sets the time
+      let mins;
+      let secs;
+      if (this.props.data.length >= 1) {
+        mins = this.props.data[0].mins;
+        secs = this.props.data[0].secs;
+      } else {
+        mins = 0;
+        secs = 0;
+      }
 
       this.setState({ currentTime: Number(mins * 60) + Number(secs) });
     }
@@ -84,8 +93,11 @@ class ClockContainer extends React.Component {
   };
 
   render() {
+    const taskName =
+      this.props.data.length !== 0 ? this.props.data[0].title : "";
     return (
       <Clock
+        name={taskName}
         toggle={this.onToggle}
         reset={this.onReset}
         clock={this.state}
@@ -103,7 +115,7 @@ const timeOutput = (num) => {
   return `${hrs}:${mins}`;
 };
 
-const Clock = ({ inc, dec, clock, toggle, reset }) => (
+const Clock = ({ inc, dec, clock, toggle, reset, name }) => (
   <div style={{ marginBottom: 20 }}>
     <button className="btn btn-sm btn-secondary" onClick={() => dec(15)}>
       -
@@ -120,6 +132,7 @@ const Clock = ({ inc, dec, clock, toggle, reset }) => (
         Reset
       </button>
     ) : null}
+    <div>Tarea en curso: {name}</div>
     {/* <span className={clock.expired ? "end" : "end hidden"}>Finished!</span> */}
   </div>
 );

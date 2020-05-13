@@ -8,6 +8,7 @@ let tasks = [
     mins: "80",
     secs: "5",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
+    completed: true,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471816",
@@ -16,6 +17,7 @@ let tasks = [
     mins: "20",
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
+    completed: true,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471817",
@@ -24,6 +26,7 @@ let tasks = [
     mins: "35",
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
+    completed: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471819",
@@ -32,6 +35,7 @@ let tasks = [
     mins: "120",
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
+    completed: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181a",
@@ -40,6 +44,7 @@ let tasks = [
     mins: "25",
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
+    completed: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181b",
@@ -48,6 +53,7 @@ let tasks = [
     mins: "40",
     secs: "5",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
+    completed: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181e",
@@ -56,6 +62,7 @@ let tasks = [
     mins: "15",
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
+    completed: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181f",
@@ -64,6 +71,7 @@ let tasks = [
     mins: "115",
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
+    completed: false,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471821",
@@ -72,6 +80,7 @@ let tasks = [
     mins: "60",
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
+    completed: false,
   },
 ];
 
@@ -90,6 +99,7 @@ export function saveTask(task) {
   taskInDb.mins = task.mins;
   taskInDb.secs = task.secs;
   taskInDb.range = rangesAPI.ranges.find((r) => r._id === task.rangeId);
+  taskInDb.completed = false;
 
   if (!taskInDb._id) {
     taskInDb._id = Date.now().toString();
