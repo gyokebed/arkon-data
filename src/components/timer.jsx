@@ -1,5 +1,5 @@
 import React from "react";
-import { finishTask, reorderTasks } from "../services/fakeTasksService";
+import { finishTask } from "../services/fakeTasksService";
 
 class ClockContainer extends React.Component {
   state = {
@@ -17,6 +17,7 @@ class ClockContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.data !== this.props.data) {
+      // this.stopClock();
       // Checks if array has task elements and sets the time
       let mins;
       let secs;
@@ -61,13 +62,11 @@ class ClockContainer extends React.Component {
   stopClock = () => {
     clearInterval(this.state.intervalId);
     this.setState({ intervalId: null });
-    console.log(
-      this.state.currentTime,
+    const elapsedTime =
       Number(this.props.data[0].mins * 60) +
-        Number(this.props.data[0].secs) -
-        this.state.currentTime,
-      "Tiempo de trabajo (secs)"
-    );
+      Number(this.props.data[0].secs) -
+      this.state.currentTime;
+    return elapsedTime;
   };
 
   resetClockTime = () => {
@@ -90,7 +89,9 @@ class ClockContainer extends React.Component {
   };
 
   onFinish = () => {
-    this.props.setOnFinish([...finishTask(this.props.data[0])]);
+    this.props.setOnFinish([
+      ...finishTask(this.props.data[0], this.stopClock()),
+    ]);
   };
 
   onInc = (x) => {

@@ -133,11 +133,12 @@ export function deleteTask(id) {
   return taskInDb;
 }
 
-export function finishTask(task) {
+export function finishTask(task, elapsedTime) {
   let taskInDB = tasks.find((t) => {
     return t._id === task._id;
   });
   taskInDB.completed = true;
+  taskInDB.elapsedTime = elapsedTime;
 
   return tasks;
 }
