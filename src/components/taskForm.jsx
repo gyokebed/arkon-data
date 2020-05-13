@@ -8,8 +8,10 @@ import Select from "./common/select";
 const TaskForm = ({ match, history }) => {
   const [data, setData] = useState({
     title: "",
-    rangeId: "",
     description: "",
+    mins: "",
+    secs: "",
+    rangeId: "",
   });
   const [ranges, setRanges] = useState([]);
   const [errors, setErrors] = useState({});
@@ -17,7 +19,9 @@ const TaskForm = ({ match, history }) => {
   const schema = {
     _id: Joi.string(),
     title: Joi.string().required().label("Title"),
-    description: Joi.string().required().label("Description"),
+    description: Joi.required().label("Description"),
+    mins: Joi.number().min(0).max(120).integer().label("Mins"),
+    secs: Joi.number().min(0).max(60).integer().label("Secs"),
     rangeId: Joi.string().required().label("Range"),
   };
 
@@ -48,6 +52,7 @@ const TaskForm = ({ match, history }) => {
   };
 
   const handleChange = ({ currentTarget: input }) => {
+    // console.log(input);
     const changeErrors = { ...errors };
     const errorMessage = validateProperty(input);
     if (errorMessage) changeErrors[input.name] = errorMessage;
@@ -112,6 +117,8 @@ const TaskForm = ({ match, history }) => {
       _id: task._id,
       title: task.title,
       description: task.description,
+      mins: task.mins,
+      secs: task.secs,
       rangeId: task.range._id,
     };
   };
@@ -127,8 +134,10 @@ const TaskForm = ({ match, history }) => {
       <form onSubmit={handleSubmit}>
         {renderInput("title", "Título")}
         {renderInput("description", "Descripción")}
+        {renderInput("mins", "Minutos", "number")}
+        {renderInput("secs", "Segundos", "number")}
         {renderSelect("rangeId", "Rango de duración", ranges)}
-        {renderButton("Save")}
+        {renderButton("Guardar")}
       </form>
     </div>
   );

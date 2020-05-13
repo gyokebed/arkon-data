@@ -7,6 +7,7 @@ import TableHeader from "./common/tableHeader";
 import _ from "lodash";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import arrayMove from "array-move";
+import ClockContainer from "./timer";
 
 const Tasks = ({ history }) => {
   const [tasks, setTasks] = useState([]);
@@ -21,6 +22,8 @@ const Tasks = ({ history }) => {
     },
     { path: "description", label: "Descripción" },
     { path: "range.name", label: "Rango de duración" },
+    { path: "mins", label: "Minutos" },
+    { path: "secs", label: "Segundos" },
     {
       key: "editar",
       content: (task) => (
@@ -50,15 +53,14 @@ const Tasks = ({ history }) => {
   }, []);
 
   const handleRangeSelect = (range) => {
-    console.log(range);
     setSelectedRange(range);
     setSearchQuery("");
   };
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    setSelectedRange(null);
-  };
+  // const handleSearch = (query) => {
+  //   setSearchQuery(query);
+  //   setSelectedRange(null);
+  // };
 
   const handleDelete = (task) => {
     setTasks(tasks.filter((t) => t._id !== task._id));
@@ -147,6 +149,8 @@ const Tasks = ({ history }) => {
           />
         </div>
         <div className="col">
+          <ClockContainer />
+
           <Link
             to="/tasks/new"
             className="btn btn-primary"
