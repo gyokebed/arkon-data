@@ -9,7 +9,7 @@ let tasks = [
     secs: "5",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
-    elapsedTime: "3000",
+    elapsedTime: 3000,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471816",
@@ -19,7 +19,7 @@ let tasks = [
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
-    elapsedTime: "1230",
+    elapsedTime: 1230,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471817",
@@ -29,7 +29,7 @@ let tasks = [
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
-    elapsedTime: null,
+    elapsedTime: 0,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471819",
@@ -39,7 +39,7 @@ let tasks = [
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
-    elapsedTime: null,
+    elapsedTime: 0,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181a",
@@ -49,7 +49,7 @@ let tasks = [
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
-    elapsedTime: null,
+    elapsedTime: 0,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181b",
@@ -59,7 +59,7 @@ let tasks = [
     secs: "5",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
-    elapsedTime: null,
+    elapsedTime: 0,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181e",
@@ -69,7 +69,7 @@ let tasks = [
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
-    elapsedTime: null,
+    elapsedTime: 0,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181f",
@@ -79,7 +79,7 @@ let tasks = [
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
-    elapsedTime: null,
+    elapsedTime: 0,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471821",
@@ -89,7 +89,7 @@ let tasks = [
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: false,
-    elapsedTime: null,
+    elapsedTime: 0,
   },
 ];
 
@@ -109,6 +109,7 @@ export function saveTask(task) {
   taskInDb.secs = task.secs;
   taskInDb.range = rangesAPI.ranges.find((r) => r._id === task.rangeId);
   taskInDb.completed = false;
+  taskInDb.elapsedTime = 0;
 
   if (!taskInDb._id) {
     taskInDb._id = Date.now().toString();
@@ -133,11 +134,10 @@ export function deleteTask(id) {
 }
 
 export function finishTask(task) {
-  // let taskInDB = tasks.find((t) => {
-  //   return t._id === task._id;
-  // });
-  // let index = tasks.indexOf(taskInDB);
-  // taskInDB.completed = true;
-  console.log(tasks);
-  return;
+  let taskInDB = tasks.find((t) => {
+    return t._id === task._id;
+  });
+  taskInDB.completed = true;
+
+  return tasks;
 }

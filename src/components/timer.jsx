@@ -1,5 +1,5 @@
 import React from "react";
-import { finishTask } from "../services/fakeTasksService";
+import { finishTask, reorderTasks } from "../services/fakeTasksService";
 
 class ClockContainer extends React.Component {
   state = {
@@ -90,8 +90,7 @@ class ClockContainer extends React.Component {
   };
 
   onFinish = () => {
-    console.log("button finished clicked");
-    console.log(finishTask(this.props.data[0]));
+    this.props.setOnFinish([...finishTask(this.props.data[0])]);
   };
 
   onInc = (x) => {

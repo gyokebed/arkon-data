@@ -145,6 +145,11 @@ const Tasks = ({ history }) => {
     return <SortableList data={data} columns={columns} onSortEnd={onSortEnd} />;
   };
 
+  const onFinishTask = (items) => {
+    setTasks(items);
+    console.log(getTasks());
+  };
+
   const filteredData = getData();
   return (
     <React.Fragment>
@@ -157,7 +162,7 @@ const Tasks = ({ history }) => {
           />
         </div>
         <div className="col">
-          <ClockContainer data={filteredData} />
+          <ClockContainer data={filteredData} setOnFinish={onFinishTask} />
 
           <Link
             to="/tasks/new"
