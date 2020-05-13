@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTasks, deleteTask, saveTasks } from "../services/fakeTasksService";
+import {
+  getTasks,
+  deleteTask,
+  reorderTasks,
+} from "../services/fakeTasksService";
 import { getRanges } from "../services/fakeRangeService";
 import ListGroup from "./common/listGroup";
 import TableHeader from "./common/tableHeader";
@@ -135,7 +139,7 @@ const Tasks = ({ history }) => {
       let itemsCopy = [...data];
       itemsCopy = arrayMove(itemsCopy, oldIndex, newIndex);
       setTasks(itemsCopy);
-      saveTasks(itemsCopy);
+      reorderTasks(itemsCopy);
     };
 
     return <SortableList data={data} columns={columns} onSortEnd={onSortEnd} />;

@@ -1,4 +1,5 @@
 import React from "react";
+import { finishTask } from "../services/fakeTasksService";
 
 class ClockContainer extends React.Component {
   state = {
@@ -88,6 +89,11 @@ class ClockContainer extends React.Component {
     this.setState({ currentTime: Number(mins * 60) + Number(secs) });
   };
 
+  onFinish = () => {
+    console.log("button finished clicked");
+    console.log(finishTask(this.props.data[0]));
+  };
+
   onInc = (x) => {
     if (this.state.intervalId) return;
     this.incSec(x);
@@ -106,6 +112,7 @@ class ClockContainer extends React.Component {
         name={taskName}
         toggle={this.onToggle}
         reset={this.onReset}
+        finish={this.onFinish}
         clock={this.state}
         inc={this.onInc}
         dec={this.onDec}
@@ -121,7 +128,7 @@ const timeOutput = (num) => {
   return `${hrs}:${mins}`;
 };
 
-const Clock = ({ inc, dec, clock, toggle, reset, name }) => {
+const Clock = ({ inc, dec, clock, toggle, reset, finish, name }) => {
   const { intervalId } = clock;
   return (
     <div style={{ marginBottom: 20 }}>
@@ -145,6 +152,9 @@ const Clock = ({ inc, dec, clock, toggle, reset, name }) => {
           Reiniciar
         </button>
       ) : null}
+      <button className="btn btn-sm btn-danger" onClick={finish}>
+        Finalizar
+      </button>
       <div>Tarea en curso: {name}</div>
       {/* <span className={clock.expired ? "end" : "end hidden"}>Finished!</span> */}
     </div>

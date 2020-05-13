@@ -118,8 +118,11 @@ export function saveTask(task) {
   return taskInDb;
 }
 
-export function saveTasks(items) {
-  tasks = [...items];
+export function reorderTasks(items) {
+  const completedTasks = tasks.filter((t) => {
+    return t.completed === true;
+  });
+  tasks = [...completedTasks, ...items];
   return tasks;
 }
 
@@ -127,4 +130,14 @@ export function deleteTask(id) {
   let taskInDb = tasks.find((t) => t._id === id);
   tasks.splice(tasks.indexOf(taskInDb), 1);
   return taskInDb;
+}
+
+export function finishTask(task) {
+  // let taskInDB = tasks.find((t) => {
+  //   return t._id === task._id;
+  // });
+  // let index = tasks.indexOf(taskInDB);
+  // taskInDB.completed = true;
+  console.log(tasks);
+  return;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Joi from "joi-browser";
-import { getTask, saveTask } from "../services/fakeTasksService";
+import { getTask, reorderTasks } from "../services/fakeTasksService";
 import { getRanges } from "../services/fakeRangeService";
 import Input from "./common/input";
 import Select from "./common/select";
@@ -124,7 +124,7 @@ const TaskForm = ({ match, history }) => {
   };
 
   const doSubmit = () => {
-    saveTask(data);
+    reorderTasks(data);
     history.push("/tasks");
   };
 
