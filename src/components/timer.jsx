@@ -2,10 +2,26 @@ import React from "react";
 
 class ClockContainer extends React.Component {
   state = {
-    currentTime: 0,
+    currentTime: this.props.data[0].mins,
     intervalId: null,
     expired: false,
   };
+
+  componentDidMount() {
+    const mins = this.props.data[0].mins;
+    const secs = this.props.data[0].secs;
+
+    this.setState({ currentTime: Number(mins * 60) + Number(secs) });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.data !== this.props.data) {
+      const mins = this.props.data[0].mins;
+      const secs = this.props.data[0].secs;
+
+      this.setState({ currentTime: Number(mins * 60) + Number(secs) });
+    }
+  }
 
   triggerExpired = () => {
     this.resetClockTime();
@@ -51,6 +67,10 @@ class ClockContainer extends React.Component {
   onReset = () => {
     this.stopClock();
     this.resetClockTime();
+    const mins = this.props.data[0].mins;
+    const secs = this.props.data[0].secs;
+
+    this.setState({ currentTime: Number(mins * 60) + Number(secs) });
   };
 
   onInc = (x) => {

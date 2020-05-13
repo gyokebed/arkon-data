@@ -6,7 +6,7 @@ let tasks = [
     title: "Email",
     description: "Responder email a cliente de China",
     mins: "80",
-    secs: "00",
+    secs: "5",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
   },
   {
@@ -22,7 +22,7 @@ let tasks = [
     title: "Feature 1",
     description: "Resolver feature 1",
     mins: "35",
-    secs: "00",
+    secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
   },
   {
@@ -38,7 +38,7 @@ let tasks = [
     title: "Feature 3",
     description: "Resolver Feature 3",
     mins: "25",
-    secs: "00",
+    secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
   },
   {
@@ -46,7 +46,7 @@ let tasks = [
     title: "Feature 4",
     description: "Resolver feature 4",
     mins: "40",
-    secs: "00",
+    secs: "5",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
   },
   {
@@ -54,7 +54,7 @@ let tasks = [
     title: "Feature 5",
     description: "Resolver feature 5",
     mins: "15",
-    secs: "00",
+    secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
   },
   {
@@ -62,7 +62,7 @@ let tasks = [
     title: "Feature 6",
     description: "Resolver feature 6",
     mins: "115",
-    secs: "00",
+    secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
   },
   {
@@ -70,7 +70,7 @@ let tasks = [
     title: "Feature 7",
     description: "Resolver feature 7",
     mins: "60",
-    secs: "00",
+    secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
   },
 ];

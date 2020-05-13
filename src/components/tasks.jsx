@@ -10,7 +10,7 @@ import arrayMove from "array-move";
 import ClockContainer from "./timer";
 
 const Tasks = ({ history }) => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(getTasks());
   const [ranges, setRanges] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRange, setSelectedRange] = useState(null);
@@ -137,7 +137,6 @@ const Tasks = ({ history }) => {
   };
 
   const filteredData = getData();
-
   return (
     <React.Fragment>
       <div className="row">
@@ -149,7 +148,7 @@ const Tasks = ({ history }) => {
           />
         </div>
         <div className="col">
-          <ClockContainer />
+          <ClockContainer data={filteredData} />
 
           <Link
             to="/tasks/new"
