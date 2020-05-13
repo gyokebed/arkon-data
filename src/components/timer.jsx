@@ -121,26 +121,34 @@ const timeOutput = (num) => {
   return `${hrs}:${mins}`;
 };
 
-const Clock = ({ inc, dec, clock, toggle, reset, name }) => (
-  <div style={{ marginBottom: 20 }}>
-    <button className="btn btn-sm btn-secondary" onClick={() => dec(15)}>
-      -
-    </button>
-    {timeOutput(clock.currentTime)}
-    <button className="btn btn-sm btn-secondary" onClick={() => inc(15)}>
-      +
-    </button>
-    <button className="btn btn-sm btn-primary" onClick={toggle}>
-      {clock.intervalId ? "Stop" : "Start"}
-    </button>
-    {clock.intervalId || clock.currentTime > 0 ? (
-      <button className="btn btn-sm btn-primary" onClick={reset}>
-        Reset
+const Clock = ({ inc, dec, clock, toggle, reset, name }) => {
+  const { intervalId } = clock;
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <button className="btn btn-sm btn-secondary" onClick={() => dec(15)}>
+        -
       </button>
-    ) : null}
-    <div>Tarea en curso: {name}</div>
-    {/* <span className={clock.expired ? "end" : "end hidden"}>Finished!</span> */}
-  </div>
-);
+      {timeOutput(clock.currentTime)}
+      <button className="btn btn-sm btn-secondary" onClick={() => inc(15)}>
+        +
+      </button>
+      <button
+        className={
+          intervalId ? "btn btn-sm btn-danger" : "btn btn-sm btn-success"
+        }
+        onClick={toggle}
+      >
+        {intervalId ? "Parar" : "Iniciar"}
+      </button>
+      {intervalId || clock.currentTime > 0 ? (
+        <button className="btn btn-sm btn-warning" onClick={reset}>
+          Reiniciar
+        </button>
+      ) : null}
+      <div>Tarea en curso: {name}</div>
+      {/* <span className={clock.expired ? "end" : "end hidden"}>Finished!</span> */}
+    </div>
+  );
+};
 
 export default ClockContainer;
