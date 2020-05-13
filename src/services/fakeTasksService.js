@@ -9,6 +9,7 @@ let tasks = [
     secs: "5",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
+    elapsedTime: "3000",
   },
   {
     _id: "5b21ca3eeb7f6fbccd471816",
@@ -18,6 +19,7 @@ let tasks = [
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
+    elapsedTime: "1230",
   },
   {
     _id: "5b21ca3eeb7f6fbccd471817",
@@ -27,6 +29,7 @@ let tasks = [
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
+    elapsedTime: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471819",
@@ -36,6 +39,7 @@ let tasks = [
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
+    elapsedTime: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181a",
@@ -45,6 +49,7 @@ let tasks = [
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
+    elapsedTime: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181b",
@@ -54,6 +59,7 @@ let tasks = [
     secs: "5",
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
+    elapsedTime: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181e",
@@ -63,6 +69,7 @@ let tasks = [
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
+    elapsedTime: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181f",
@@ -72,6 +79,7 @@ let tasks = [
     secs: "30",
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
+    elapsedTime: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471821",
@@ -81,6 +89,7 @@ let tasks = [
     secs: "0",
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: false,
+    elapsedTime: null,
   },
 ];
 

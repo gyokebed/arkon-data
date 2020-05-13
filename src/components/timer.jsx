@@ -15,7 +15,6 @@ class ClockContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.data);
     if (prevProps.data !== this.props.data) {
       // Checks if array has task elements and sets the time
       let mins;
@@ -61,6 +60,13 @@ class ClockContainer extends React.Component {
   stopClock = () => {
     clearInterval(this.state.intervalId);
     this.setState({ intervalId: null });
+    console.log(
+      this.state.currentTime,
+      Number(this.props.data[0].mins * 60) +
+        Number(this.props.data[0].secs) -
+        this.state.currentTime,
+      "Tiempo de trabajo (secs)"
+    );
   };
 
   resetClockTime = () => {
