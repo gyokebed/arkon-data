@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "./components/navBar";
 import Tasks from "./components/tasks";
+import TasksChart from "./components/tasksChart";
 import TasksDone from "./components/tasksDone";
 import TaskForm from "./components/taskForm";
 import NotFound from "./components/notFound";
@@ -12,6 +13,7 @@ function App() {
       <NavBar />
       <main className="container">
         <Switch>
+          <Route path="/tasks/record" component={TasksChart} />
           <Route path="/tasks/done" component={TasksDone} />
           <Route path="/tasks/:id" component={TaskForm} />
           <Route path="/tasks" component={Tasks} />
