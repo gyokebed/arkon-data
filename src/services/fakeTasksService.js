@@ -2,14 +2,14 @@ import * as rangesAPI from "./fakeRangeService";
 
 let tasks = [
   {
-    _id: "5b21ca3eeb7f6fbccd471817",
+    _id: "5b21ca3eeb7f6fbccd471317",
     title: "Feature 1",
     description: "Resolver feature 1",
     mins: 35,
     secs: 0,
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: true,
-    elapsedTime: 0,
+    elapsedTime: 2100,
     completedItemDate: null,
   },
   {
@@ -20,7 +20,7 @@ let tasks = [
     secs: 30,
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: true,
-    elapsedTime: 0,
+    elapsedTime: 7100,
     completedItemDate: null,
   },
   {
@@ -31,7 +31,7 @@ let tasks = [
     secs: 0,
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: true,
-    elapsedTime: 0,
+    elapsedTime: 500,
     completedItemDate: null,
   },
   {
@@ -42,7 +42,7 @@ let tasks = [
     secs: 5,
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: true,
-    elapsedTime: 0,
+    elapsedTime: 2400,
     completedItemDate: null,
   },
   {
@@ -53,7 +53,7 @@ let tasks = [
     secs: 0,
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: true,
-    elapsedTime: 0,
+    elapsedTime: 300,
     completedItemDate: null,
   },
   {
@@ -64,7 +64,7 @@ let tasks = [
     secs: 30,
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: true,
-    elapsedTime: 0,
+    elapsedTime: 6800,
     completedItemDate: null,
   },
   {
@@ -75,7 +75,7 @@ let tasks = [
     secs: 0,
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
-    elapsedTime: 0,
+    elapsedTime: 3600,
     completedItemDate: null,
   },
   {
@@ -86,7 +86,7 @@ let tasks = [
     secs: 5,
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
-    elapsedTime: 3000,
+    elapsedTime: 4000,
     completedItemDate: "2018-01-03T19:04:28.809Z",
   },
   {
@@ -97,18 +97,18 @@ let tasks = [
     secs: 30,
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
-    elapsedTime: 1230,
+    elapsedTime: 1100,
     completedItemDate: "2018-01-03T19:04:28.809Z",
   },
   {
-    _id: "5b21ca3eeb7f6fbccd471816",
+    _id: "5b21ca3eeb7f6fbccd471817",
     title: "Feature 10",
     description: "Resolver feature 10",
     mins: 20,
     secs: 30,
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
-    elapsedTime: 1230,
+    elapsedTime: 1100,
     completedItemDate: "2018-01-03T19:04:28.809Z",
   },
 ];
