@@ -50,10 +50,8 @@ const Tasks = ({ history }) => {
   ];
 
   useEffect(() => {
-    // console.log("useEffect has been called!");
     setTasks(getTasks());
-
-    setRanges([{ _id: "", name: "Todas" }, ...getRanges()]);
+    setRanges([{ _id: "", name: "Tareas pendientes" }, ...getRanges()]);
   }, []);
 
   const handleRangeSelect = (range) => {
@@ -151,6 +149,8 @@ const Tasks = ({ history }) => {
   };
 
   const filteredData = getData();
+
+  console.log(filteredData);
   return (
     <React.Fragment>
       <div className="row">

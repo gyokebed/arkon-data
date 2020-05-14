@@ -23,8 +23,11 @@ const NavBar = () => {
           <NavLink className="nav-item nav-link" to="/tasks">
             Tareas
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/record">
+          <NavLink className="nav-item nav-link" to="/tasks/record">
             Historial
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/tasks/done">
+            Terminadas
           </NavLink>
         </div>
       </div>
