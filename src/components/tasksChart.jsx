@@ -88,14 +88,16 @@ const TasksChart = () => {
   };
 
   return (
-    <div
-      style={{
-        height: "50vh",
-        width: "100%",
-        textAlign: "center",
-      }}
-    >
-      <div className="rowChart" ref={chartRef}></div>
+    <div className="row">
+      <div
+        style={{
+          height: "50vh",
+          width: "100%",
+          textAlign: "center",
+        }}
+      >
+        <div className="rowChart" ref={chartRef}></div>
+      </div>
     </div>
   );
 };

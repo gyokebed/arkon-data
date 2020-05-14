@@ -16,8 +16,7 @@ import ClockContainer from "./timer";
 const Tasks = ({ history }) => {
   const [tasks, setTasks] = useState(getTasks());
   const [ranges, setRanges] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedRange, setSelectedRange] = useState(null);
+  const [selectedRange, setSelectedRange] = useState({ name: "Todas" });
 
   const columns = [
     {
@@ -107,6 +106,7 @@ const Tasks = ({ history }) => {
               columns={columns}
               index={index}
               key={`item-${item.title}`}
+              disabled={selectedRange.name !== "Todas"}
             />
           ) : (
             ""
@@ -156,7 +156,6 @@ const Tasks = ({ history }) => {
         </div>
         <div className="col mt-3 mb-3">
           <ClockContainer data={filteredData} setOnFinish={onFinishTask} />
-
           <Link
             to="/tasks/new"
             className="btn btn-primary"

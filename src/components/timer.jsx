@@ -116,17 +116,17 @@ const Clock = ({ clock, toggle, reset, finish, name }) => {
   const { intervalId } = clock;
   return (
     <div className="container mb-3 p-3 border">
-      <div class="row justify-content-sm-center">
+      <div className="row justify-content-sm-center">
         <h2>
           Tarea en curso: <em>{name}</em>
         </h2>
       </div>
-      <div class="row justify-content-sm-center">
-        <div class="col col-md-auto">
+      <div className="row justify-content-sm-center">
+        <div className="col col-md-auto">
           <h1>{timeOutput(clock.currentTime)}</h1>
         </div>
 
-        <div class="col col-md-auto">
+        <div className="col col-md-auto">
           <button
             className={
               intervalId
