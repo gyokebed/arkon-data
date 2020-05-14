@@ -31,7 +31,10 @@ const Tasks = ({ history }) => {
     {
       key: "editar",
       content: (task) => (
-        <button onClick={() => handleEdit(task)} className="btn btn-sm">
+        <button
+          onClick={() => handleEdit(task)}
+          className="btn btn-primary btn-sm"
+        >
           Editar
         </button>
       ),

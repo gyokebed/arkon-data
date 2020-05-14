@@ -178,7 +178,9 @@ const TaskForm = ({ match, history }) => {
             onChange={handleOptionChange}
             id="user-option"
           >
-            <option value="default">Opciones por default</option>
+            <option value="default">
+              Opciones prederteminadas (Rango de duración)
+            </option>
             <option value="custom">Ingresar tiempo</option>
           </select>
         </div>

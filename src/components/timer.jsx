@@ -115,27 +115,41 @@ const timeOutput = (num) => {
 const Clock = ({ clock, toggle, reset, finish, name }) => {
   const { intervalId } = clock;
   return (
-    <div style={{ marginBottom: 20 }}>
-      {timeOutput(clock.currentTime)}
+    <div className="container" style={{ marginBottom: 20 }}>
+      <div class="row justify-content-sm-center">
+        <h2>
+          Tarea en curso: <em>{name}</em>
+        </h2>
+      </div>
+      <div class="row justify-content-sm-center">
+        <div class="col col-md-auto">
+          <h1>{timeOutput(clock.currentTime)}</h1>
+        </div>
 
-      <button
-        className={
-          intervalId ? "btn btn-sm btn-danger" : "btn btn-sm btn-success"
-        }
-        onClick={toggle}
-      >
-        {intervalId ? "Detener" : "Iniciar"}
-      </button>
-      {intervalId || clock.currentTime > 0 ? (
-        <button className="btn btn-sm btn-warning" onClick={reset}>
-          Reiniciar
-        </button>
-      ) : null}
-      <button className="btn btn-sm btn-danger" onClick={finish}>
-        Finalizar tarea
-      </button>
-      <div>Tarea en curso: {name}</div>
-      {/* <span className={clock.expired ? "end" : "end hidden"}>Finished!</span> */}
+        <div class="col col-md-auto">
+          <button
+            className={
+              intervalId
+                ? "btn btn-sm btn-danger mr-2 mt-2"
+                : "btn btn-sm btn-success mr-2 mt-2"
+            }
+            onClick={toggle}
+          >
+            {intervalId ? "Detener" : "Iniciar"}
+          </button>
+          {intervalId || clock.currentTime > 0 ? (
+            <button
+              className="btn btn-sm btn-warning mr-2 mt-2"
+              onClick={reset}
+            >
+              Reiniciar
+            </button>
+          ) : null}
+          <button className="btn btn-sm btn-danger mt-2" onClick={finish}>
+            Finalizar tarea
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
