@@ -11,7 +11,7 @@ This project was developed mainly with:
 
 In the project directory, you can run:
 
-### `yarn install
+### `yarn install`
 
 Intalls the required packages
 
