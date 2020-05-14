@@ -10,7 +10,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
     elapsedTime: 3000,
-    completedDate: "2018-01-03T19:04:28.809Z",
+    completedItemDate: "2018-01-03T19:04:28.809Z",
   },
   {
     _id: "5b21ca3eeb7f6fbccd471816",
@@ -21,7 +21,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
     elapsedTime: 1230,
-    completedDate: "2018-01-03T19:04:28.809Z",
+    completedItemDate: "2018-01-03T19:04:28.809Z",
   },
   {
     _id: "5b21ca3eeb7f6fbccd471817",
@@ -32,7 +32,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
     elapsedTime: 0,
-    completedDate: null,
+    completedItemDate: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471819",
@@ -43,7 +43,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
     elapsedTime: 0,
-    completedDate: null,
+    completedItemDate: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181a",
@@ -54,7 +54,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
     elapsedTime: 0,
-    completedDate: null,
+    completedItemDate: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181b",
@@ -65,7 +65,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
     elapsedTime: 0,
-    completedDate: null,
+    completedItemDate: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181e",
@@ -76,7 +76,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
     elapsedTime: 0,
-    completedDate: null,
+    completedItemDate: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181f",
@@ -87,7 +87,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
     elapsedTime: 0,
-    completedDate: null,
+    completedItemDate: null,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471821",
@@ -98,7 +98,7 @@ let tasks = [
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: false,
     elapsedTime: 0,
-    completedDate: null,
+    completedItemDate: null,
   },
 ];
 
@@ -119,7 +119,7 @@ export function saveTask(task) {
   taskInDb.range = rangesAPI.ranges.find((r) => r._id === task.rangeId);
   taskInDb.completed = false;
   taskInDb.elapsedTime = 0;
-  taskInDb.completedDate = null;
+  taskInDb.completedItemDate = null;
 
   if (!taskInDb._id) {
     taskInDb._id = Date.now().toString();
@@ -148,7 +148,7 @@ export function finishTask(task, elapsedTime) {
     return t._id === task._id;
   });
   taskInDB.completed = true;
-  taskInDB.completedDate = "2018-01-03T19:04:28.809XXXXX";
+  taskInDB.completedItemDate = +new Date();
   taskInDB.elapsedTime = elapsedTime;
 
   return tasks;
