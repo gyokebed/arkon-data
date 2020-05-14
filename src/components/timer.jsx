@@ -145,7 +145,7 @@ const Clock = ({ inc, dec, clock, toggle, reset, finish, name }) => {
         }
         onClick={toggle}
       >
-        {intervalId ? "Parar" : "Iniciar"}
+        {intervalId ? "Detener" : "Iniciar"}
       </button>
       {intervalId || clock.currentTime > 0 ? (
         <button className="btn btn-sm btn-warning" onClick={reset}>
@@ -153,7 +153,7 @@ const Clock = ({ inc, dec, clock, toggle, reset, finish, name }) => {
         </button>
       ) : null}
       <button className="btn btn-sm btn-danger" onClick={finish}>
-        Finalizar
+        Finalizar tarea
       </button>
       <div>Tarea en curso: {name}</div>
       {/* <span className={clock.expired ? "end" : "end hidden"}>Finished!</span> */}
