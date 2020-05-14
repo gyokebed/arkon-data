@@ -1,20 +1,27 @@
 import React, { useState, useEffect, createRef } from "react";
 import * as d3 from "d3";
+import { getTasks } from "../services/fakeTasksService";
 
 const TasksChart = () => {
+  const items = getTasks();
+  // Get tasks completed
+  const doneTasks = items.filter((item) => {
+    return item.completed;
+  });
+  // Get tasks to do
+  const toDoTasks = items.filter((item) => {
+    return !item.completed;
+  });
+
   const [data, setData] = useState([
-    { skill: "CSS", value: 80 },
-    { skill: "HTML", value: 70 },
-    { skill: "JS", value: 85 },
-    { skill: "ANGULAR", value: 90 },
-    { skill: "REACT", value: 75 },
-    { skill: "D3", value: 70 },
-    { skill: "NODE JS", value: 65 },
-    { skill: "JAVA", value: 65 },
-    { skill: "UI DESIGN", value: 70 },
-    { skill: "XD", value: 65 },
+    {
+      tasks: "Terminadas",
+      value: doneTasks.length,
+    },
+    { tasks: "Pendientes", value: toDoTasks.length },
   ]);
-  const [yAxisAttribute, setyAxisAttribute] = useState("skill");
+
+  const [yAxisAttribute, setyAxisAttribute] = useState("tasks");
   const [xAxisAttribute, setxAxisAttribute] = useState("value");
   const [width, setWidth] = useState(1000);
   const [height, setHeight] = useState(400);
@@ -88,7 +95,7 @@ const TasksChart = () => {
         textAlign: "center",
       }}
     >
-      <div class="rowChart" ref={chartRef}></div>;
+      <div className="rowChart" ref={chartRef}></div>
     </div>
   );
 };

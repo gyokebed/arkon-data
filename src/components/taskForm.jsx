@@ -104,7 +104,7 @@ const TaskForm = ({ match, history }) => {
     setRanges(ranges);
 
     const taskId = match.params.id;
-    if (taskId === "new" || taskId === "done" || taskId === "record") return;
+    if (taskId === "new" || taskId === "done" || taskId === "chart") return;
 
     const task = getTask(taskId);
     if (!task) return history.replace("/not-found");

@@ -13,7 +13,7 @@ function App() {
       <NavBar />
       <main className="container">
         <Switch>
-          <Route path="/tasks/record" component={TasksChart} />
+          <Route path="/tasks/chart" component={TasksChart} />
           <Route path="/tasks/done" component={TasksDone} />
           <Route path="/tasks/:id" component={TaskForm} />
           <Route path="/tasks" component={Tasks} />

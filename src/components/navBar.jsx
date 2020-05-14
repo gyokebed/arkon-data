@@ -23,7 +23,7 @@ const NavBar = () => {
           <NavLink className="nav-item nav-link" to="/tasks">
             Tareas
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/tasks/record">
+          <NavLink className="nav-item nav-link" to="/tasks/chart">
             Historial
           </NavLink>
           <NavLink className="nav-item nav-link" to="/tasks/done">
