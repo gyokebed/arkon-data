@@ -155,7 +155,12 @@ const Tasks = ({ history }) => {
           />
         </div>
         <div className="col mt-3 mb-3">
-          <ClockContainer data={filteredData} setOnFinish={onFinishTask} />
+          {filteredData.length > 0 ? (
+            <ClockContainer data={filteredData} setOnFinish={onFinishTask} />
+          ) : (
+            ""
+          )}
+
           <Link
             to="/tasks/new"
             className="btn btn-primary"
