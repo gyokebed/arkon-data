@@ -146,7 +146,7 @@ const Tasks = ({ history }) => {
   return (
     <React.Fragment>
       <div className="row">
-        <div className="col-3">
+        <div className="col-md-3 mt-3">
           <h3>Tareas pendientes</h3>
           <ListGroup
             items={ranges}
@@ -154,7 +154,7 @@ const Tasks = ({ history }) => {
             onItemSelect={handleRangeSelect}
           />
         </div>
-        <div className="col">
+        <div className="col mt-3 mb-3">
           <ClockContainer data={filteredData} setOnFinish={onFinishTask} />
 
           <Link
@@ -164,11 +164,12 @@ const Tasks = ({ history }) => {
           >
             Agregar Tarea
           </Link>
-
-          <table className="table">
-            <TableHeader columns={columns} />
-            <SortableComponent columns={columns} data={filteredData} />
-          </table>
+          <div className="table-responsive">
+            <table className="table">
+              <TableHeader columns={columns} />
+              <SortableComponent columns={columns} data={filteredData} />
+            </table>
+          </div>
         </div>
       </div>
     </React.Fragment>

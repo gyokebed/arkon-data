@@ -115,7 +115,7 @@ const timeOutput = (num) => {
 const Clock = ({ clock, toggle, reset, finish, name }) => {
   const { intervalId } = clock;
   return (
-    <div className="container" style={{ marginBottom: 20 }}>
+    <div className="container mb-3 p-3 border">
       <div class="row justify-content-sm-center">
         <h2>
           Tarea en curso: <em>{name}</em>
