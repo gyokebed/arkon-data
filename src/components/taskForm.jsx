@@ -125,17 +125,33 @@ const TaskForm = ({ match, history }) => {
 
   const doSubmit = () => {
     console.log(userOption);
+    const corta = "5b21ca3eeb7f6fbccd471818";
+    const media = "5b21ca3eeb7f6fbccd471814";
+    const larga = "5b21ca3eeb7f6fbccd471820";
 
     if (userOption === "default") {
-      if (data.rangeId === "5b21ca3eeb7f6fbccd471818") {
+      // Range "Corta"
+      if (data.rangeId === corta) {
         data.mins = 15;
         data.secs = 0;
-      } else if (data.rangeId === "5b21ca3eeb7f6fbccd471814") {
+        // Range "Media"
+      } else if (data.rangeId === media) {
         data.mins = 45;
         data.secs = 0;
-      } else if (data.rangeId === "5b21ca3eeb7f6fbccd471820") {
+        // Range "Larga"
+      } else if (data.rangeId === larga) {
         data.mins = 60;
         data.secs = 0;
+      }
+    }
+
+    if (userOption === "custom") {
+      if (data.mins <= 30) {
+        data.rangeId = corta;
+      } else if (data.mins > 30 && data.mins <= 60) {
+        data.rangeId = media;
+      } else if (data.mins > 60) {
+        data.rangeId = larga;
       }
     }
 
