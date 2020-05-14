@@ -51,18 +51,12 @@ const Tasks = ({ history }) => {
 
   useEffect(() => {
     setTasks(getTasks());
-    setRanges([{ _id: "", name: "Tareas pendientes" }, ...getRanges()]);
+    setRanges([{ _id: "", name: "Todas" }, ...getRanges()]);
   }, []);
 
   const handleRangeSelect = (range) => {
     setSelectedRange(range);
-    setSearchQuery("");
   };
-
-  // const handleSearch = (query) => {
-  //   setSearchQuery(query);
-  //   setSelectedRange(null);
-  // };
 
   const handleDelete = (task) => {
     setTasks(tasks.filter((t) => t._id !== task._id));
@@ -77,11 +71,8 @@ const Tasks = ({ history }) => {
   const getData = () => {
     let allTasks = tasks;
     let filtered = allTasks;
-    if (searchQuery)
-      filtered = allTasks.filter((t) =>
-        t.title.toLowerCase().startsWith(searchQuery.toLocaleLowerCase())
-      );
-    else if (selectedRange && selectedRange._id)
+
+    if (selectedRange && selectedRange._id)
       filtered = allTasks.filter(
         (t) => t.range._id === selectedRange._id && !t.completed
       );
@@ -145,16 +136,15 @@ const Tasks = ({ history }) => {
 
   const onFinishTask = (items) => {
     setTasks(items);
-    console.log(getTasks());
   };
 
   const filteredData = getData();
 
-  console.log(filteredData);
   return (
     <React.Fragment>
       <div className="row">
         <div className="col-3">
+          <h3>Tareas pendientes</h3>
           <ListGroup
             items={ranges}
             selectedItem={selectedRange}
