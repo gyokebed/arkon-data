@@ -4,10 +4,12 @@ import TableBody from "./tableBody";
 
 const Table = ({ columns, data }) => {
   return (
-    <table className="table">
-      <TableHeader columns={columns} />
-      <TableBody data={data} columns={columns} />
-    </table>
+    <div className="table-responsive">
+      <table className="table">
+        <TableHeader columns={columns} />
+        <TableBody data={data} columns={columns} />
+      </table>
+    </div>
   );
 };
 
