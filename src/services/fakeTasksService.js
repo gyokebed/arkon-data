@@ -9,7 +9,7 @@ let tasks = [
     secs: 5,
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
-    timeElapsed: 3000,
+    elapsedTime: 3000,
     completedItemDate: "2018-01-03T19:04:28.809Z",
   },
   {
@@ -20,7 +20,7 @@ let tasks = [
     secs: 30,
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: true,
-    timeElapsed: 1230,
+    elapsedTime: 1230,
     completedItemDate: "2018-01-03T19:04:28.809Z",
   },
   {
@@ -31,7 +31,7 @@ let tasks = [
     secs: 0,
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
-    timeElapsed: 0,
+    elapsedTime: 0,
     completedItemDate: null,
   },
   {
@@ -42,7 +42,7 @@ let tasks = [
     secs: 30,
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
-    timeElapsed: 0,
+    elapsedTime: 0,
     completedItemDate: null,
   },
   {
@@ -53,7 +53,7 @@ let tasks = [
     secs: 0,
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
-    timeElapsed: 0,
+    elapsedTime: 0,
     completedItemDate: null,
   },
   {
@@ -64,7 +64,7 @@ let tasks = [
     secs: 5,
     range: { _id: "5b21ca3eeb7f6fbccd471814", name: "Media" },
     completed: false,
-    timeElapsed: 0,
+    elapsedTime: 0,
     completedItemDate: null,
   },
   {
@@ -75,7 +75,7 @@ let tasks = [
     secs: 0,
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
-    timeElapsed: 0,
+    elapsedTime: 0,
     completedItemDate: null,
   },
   {
@@ -86,7 +86,7 @@ let tasks = [
     secs: 30,
     range: { _id: "5b21ca3eeb7f6fbccd471820", name: "Larga" },
     completed: false,
-    timeElapsed: 0,
+    elapsedTime: 0,
     completedItemDate: null,
   },
   {
@@ -97,7 +97,7 @@ let tasks = [
     secs: 0,
     range: { _id: "5b21ca3eeb7f6fbccd471818", name: "Corta" },
     completed: false,
-    timeElapsed: 0,
+    elapsedTime: 0,
     completedItemDate: null,
   },
 ];
@@ -118,7 +118,7 @@ export function saveTask(task) {
   taskInDb.secs = task.secs;
   taskInDb.range = rangesAPI.ranges.find((r) => r._id === task.rangeId);
   taskInDb.completed = false;
-  taskInDb.timeElapsed = 0;
+  taskInDb.elapsedTime = 0;
   taskInDb.completedItemDate = null;
 
   if (!taskInDb._id) {
@@ -143,13 +143,13 @@ export function deleteTask(id) {
   return taskInDb;
 }
 
-export function finishTask(task, timeElapsed) {
+export function finishTask(task, elapsedTime) {
   let taskInDB = tasks.find((t) => {
     return t._id === task._id;
   });
   taskInDB.completed = true;
   taskInDB.completedItemDate = +new Date();
-  taskInDB.timeElapsed = timeElapsed;
+  taskInDB.elapsedTime = elapsedTime;
 
   return tasks;
 }
