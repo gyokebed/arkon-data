@@ -49,10 +49,6 @@ class ClockContainer extends React.Component {
     this.setState({ currentTime: this.state.currentTime - x });
   };
 
-  incSec = (x) => {
-    this.setState({ expired: false, currentTime: this.state.currentTime + x });
-  };
-
   startClock = () => {
     console.log("starting");
     const intervalId = setInterval(() => this.decSec(1), 1000);
@@ -62,11 +58,11 @@ class ClockContainer extends React.Component {
   stopClock = () => {
     clearInterval(this.state.intervalId);
     this.setState({ intervalId: null });
-    const elapsedTime =
+    const timeElapsed =
       Number(this.props.data[0].mins * 60) +
       Number(this.props.data[0].secs) -
       this.state.currentTime;
-    return elapsedTime;
+    return timeElapsed;
   };
 
   resetClockTime = () => {
@@ -94,16 +90,6 @@ class ClockContainer extends React.Component {
     ]);
   };
 
-  onInc = (x) => {
-    if (this.state.intervalId) return;
-    this.incSec(x);
-  };
-
-  onDec = (x) => {
-    if (this.state.intervalId || this.state.currentTime < x) return;
-    this.decSec(x);
-  };
-
   render() {
     const taskName =
       this.props.data.length !== 0 ? this.props.data[0].title : "";
@@ -114,8 +100,6 @@ class ClockContainer extends React.Component {
         reset={this.onReset}
         finish={this.onFinish}
         clock={this.state}
-        inc={this.onInc}
-        dec={this.onDec}
       />
     );
   }
@@ -128,17 +112,12 @@ const timeOutput = (num) => {
   return `${hrs}:${mins}`;
 };
 
-const Clock = ({ inc, dec, clock, toggle, reset, finish, name }) => {
+const Clock = ({ clock, toggle, reset, finish, name }) => {
   const { intervalId } = clock;
   return (
     <div style={{ marginBottom: 20 }}>
-      <button className="btn btn-sm btn-secondary" onClick={() => dec(15)}>
-        -
-      </button>
       {timeOutput(clock.currentTime)}
-      <button className="btn btn-sm btn-secondary" onClick={() => inc(15)}>
-        +
-      </button>
+
       <button
         className={
           intervalId ? "btn btn-sm btn-danger" : "btn btn-sm btn-success"

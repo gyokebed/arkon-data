@@ -9,20 +9,21 @@ const TaskForm = ({ match, history }) => {
   const [data, setData] = useState({
     title: "",
     description: "",
-    mins: "",
-    secs: "",
-    rangeId: "",
+    mins: 15,
+    secs: 0,
+    rangeId: "5b21ca3eeb7f6fbccd471818",
   });
   const [ranges, setRanges] = useState([]);
   const [errors, setErrors] = useState({});
+  const [userOption, setUserOption] = useState("default");
 
   const schema = {
     _id: Joi.string(),
     title: Joi.string().required().label("Title"),
-    description: Joi.required().label("Description"),
-    mins: Joi.number().min(0).max(120).integer().label("Mins"),
-    secs: Joi.number().min(0).max(60).integer().label("Secs"),
-    rangeId: Joi.string().required().label("Range"),
+    description: Joi.string().required().label("Description"),
+    mins: Joi.number().min(0).max(120).label("Mins"),
+    secs: Joi.number().min(0).max(60).label("Secs"),
+    rangeId: Joi.string().label("Range"),
   };
 
   const validate = () => {
@@ -52,7 +53,6 @@ const TaskForm = ({ match, history }) => {
   };
 
   const handleChange = ({ currentTarget: input }) => {
-    // console.log(input);
     const changeErrors = { ...errors };
     const errorMessage = validateProperty(input);
     if (errorMessage) changeErrors[input.name] = errorMessage;
@@ -124,8 +124,27 @@ const TaskForm = ({ match, history }) => {
   };
 
   const doSubmit = () => {
+    console.log(userOption);
+
+    if (userOption === "default") {
+      if (data.rangeId === "5b21ca3eeb7f6fbccd471818") {
+        data.mins = 15;
+        data.secs = 0;
+      } else if (data.rangeId === "5b21ca3eeb7f6fbccd471814") {
+        data.mins = 45;
+        data.secs = 0;
+      } else if (data.rangeId === "5b21ca3eeb7f6fbccd471820") {
+        data.mins = 60;
+        data.secs = 0;
+      }
+    }
+
     saveTask(data);
     history.push("/tasks");
+  };
+
+  const handleOptionChange = (event) => {
+    setUserOption(event.target.value);
   };
 
   return (
@@ -134,9 +153,29 @@ const TaskForm = ({ match, history }) => {
       <form onSubmit={handleSubmit}>
         {renderInput("title", "Título")}
         {renderInput("description", "Descripción")}
-        {renderInput("mins", "Minutos", "number")}
-        {renderInput("secs", "Segundos", "number")}
-        {renderSelect("rangeId", "Rango de duración", ranges)}
+
+        <div className="form-group">
+          <label htmlFor="user-option">Duración</label>
+          <select
+            className="form-control"
+            value={userOption}
+            onChange={handleOptionChange}
+            id="user-option"
+          >
+            <option value="default">Opciones por default</option>
+            <option value="custom">Ingresar tiempo</option>
+          </select>
+        </div>
+
+        {userOption === "custom"
+          ? renderInput("mins", "Minutos", "number")
+          : ""}
+        {userOption === "custom"
+          ? renderInput("secs", "Segundos", "number")
+          : ""}
+        {userOption === "default"
+          ? renderSelect("rangeId", "Rango de duración", ranges)
+          : ""}
         {renderButton("Guardar")}
       </form>
     </div>
