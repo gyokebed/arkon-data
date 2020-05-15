@@ -146,7 +146,7 @@ const Tasks = ({ history }) => {
   return (
     <React.Fragment>
       <div className="row">
-        <div className="col-md-3 mt-3">
+        <div className="col-sm-3 mt-3">
           <h3>Tareas pendientes</h3>
           <ListGroup
             items={ranges}
@@ -154,7 +154,7 @@ const Tasks = ({ history }) => {
             onItemSelect={handleRangeSelect}
           />
         </div>
-        <div className="col mt-3 mb-3">
+        <div className="col-sm-9 mt-3 mb-3">
           {filteredData.length > 0 ? (
             <ClockContainer data={filteredData} setOnFinish={onFinishTask} />
           ) : (
