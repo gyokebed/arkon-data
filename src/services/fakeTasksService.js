@@ -1,121 +1,50 @@
 import * as rangesAPI from "./fakeRangeService";
 
-const corta = "5b21ca3eeb7f6fbccd471818";
-const media = "5b21ca3eeb7f6fbccd471814";
-const larga = "5b21ca3eeb7f6fbccd471820";
+const corta = { id: "5b21ca3eeb7f6fbccd471818", name: "Corta" };
+const media = { id: "5b21ca3eeb7f6fbccd471814", name: "Media" };
+const larga = { id: "5b21ca3eeb7f6fbccd471820", name: "Larga" };
 
-let tasks = [
-  {
-    _id: "5b21ca3eeb7f6fbccd471317",
-    title: "Feature 1",
-    description: "Resolver feature 1",
-    mins: 35,
-    secs: 0,
-    range: { _id: media, name: "Media" },
-    completed: true,
-    elapsedTime: 2100,
-    completedItemDate: null,
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd471819",
-    title: "Feature 2",
-    description: "Resolver feature 2",
-    mins: 120,
-    secs: 30,
-    range: { _id: larga, name: "Larga" },
-    completed: true,
-    elapsedTime: 7100,
-    completedItemDate: null,
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd47181a",
-    title: "Feature 3",
-    description: "Resolver Feature 3",
-    mins: 25,
-    secs: 0,
-    range: { _id: corta, name: "Corta" },
-    completed: true,
-    elapsedTime: 500,
-    completedItemDate: null,
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd47181b",
-    title: "Feature 4",
-    description: "Resolver feature 4",
-    mins: 40,
-    secs: 5,
-    range: { _id: media, name: "Media" },
-    completed: true,
-    elapsedTime: 2400,
-    completedItemDate: null,
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd47181e",
-    title: "Feature 5",
-    description: "Resolver feature 5",
-    mins: 15,
-    secs: 0,
-    range: { _id: corta, name: "Corta" },
-    completed: true,
-    elapsedTime: 300,
-    completedItemDate: null,
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd47181f",
-    title: "Feature 6",
-    description: "Resolver feature 6",
-    mins: 115,
-    secs: 30,
-    range: { _id: larga, name: "Larga" },
-    completed: true,
-    elapsedTime: 6800,
-    completedItemDate: null,
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd471821",
-    title: "Feature 7",
-    description: "Resolver feature 7",
-    mins: 60,
-    secs: 0,
-    range: { _id: media, name: "Media" },
-    completed: true,
-    elapsedTime: 3600,
-    completedItemDate: null,
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd471815",
-    title: "Feature 8",
-    description: "Resolver feature 8",
-    mins: 80,
-    secs: 5,
-    range: { _id: larga, name: "Larga" },
-    completed: true,
-    elapsedTime: 4000,
-    completedItemDate: "2018-01-03T19:04:28.809Z",
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd471816",
-    title: "Feature 9",
-    description: "Resolver feature 9",
-    mins: 20,
-    secs: 30,
-    range: { _id: corta, name: "Corta" },
-    completed: true,
-    elapsedTime: 1100,
-    completedItemDate: "2018-01-03T19:04:28.809Z",
-  },
-  {
-    _id: "5b21ca3eeb7f6fbccd471817",
-    title: "Feature 10",
-    description: "Resolver feature 10",
-    mins: 25,
-    secs: 0,
-    range: { _id: corta, name: "Corta" },
-    completed: true,
-    elapsedTime: 1400,
-    completedItemDate: "2018-01-03T19:04:28.809Z",
-  },
-];
+let tasks = [];
+
+export const generateTasks = (total) => {
+  for (let i = 1; i <= total; i++) {
+    let task = {
+      _id: `5b21ca3eeb7f6fbccd47131${i}`,
+      title: `Tarea ${i}`,
+      description: `Resolver tarea ${i}`,
+      mins: Math.floor(Math.random() * 121),
+      secs: Math.floor(Math.random() * 61),
+      range: {
+        _id: undefined,
+        _name: undefined,
+      },
+      completed: true,
+      elapsedTime: undefined,
+    };
+
+    if (task.mins <= 30) {
+      task.range._id = corta.id;
+      task.range.name = corta.name;
+    } else if (task.mins > 30 && task.mins <= 60) {
+      task.range._id = media.id;
+      task.range.name = media.name;
+    } else if (task.mins > 60) {
+      task.range._id = larga.id;
+      task.range.name = larga.name;
+    }
+
+    let timeInSecs = task.mins * 60 + task.secs;
+
+    task.elapsedTime = Math.floor(
+      timeInSecs * 0.8 + Math.floor(Math.random() * (timeInSecs * 0.2))
+    );
+
+    tasks.push(task);
+  }
+  return tasks;
+};
+
+tasks = generateTasks(50);
 
 export function getTasks() {
   return tasks;
