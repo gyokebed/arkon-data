@@ -1,4 +1,4 @@
-## ArkonData - Productivity Application
+## Productivity Application
 
 This project was developed mainly with:
 
