@@ -22,17 +22,20 @@ const TaskDone = () => {
   }, []);
 
   const handleClick = () => {
-    console.log("Button Clicked");
     let allTasks = generateTasks(50);
     let completedTasks = allTasks.filter((t) => t.completed);
     setTasks(completedTasks);
   };
 
+  let button = (
+    <button className="btn btn-primary mt-3 mb-3" onClick={handleClick}>
+      Prellenar
+    </button>
+  );
+
   return (
     <React.Fragment>
-      <button className="btn btn-primary mt-3 mb-3" onClick={handleClick}>
-        Prellenar
-      </button>
+      {tasks.length === 0 ? button : null}
       <Table data={tasks} columns={columns} />
     </React.Fragment>
   );
