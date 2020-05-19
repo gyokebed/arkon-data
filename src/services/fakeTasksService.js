@@ -44,7 +44,7 @@ export const generateTasks = (total) => {
   return tasks;
 };
 
-tasks = generateTasks(50);
+// tasks = generateTasks(50);
 
 export function getTasks() {
   return tasks;

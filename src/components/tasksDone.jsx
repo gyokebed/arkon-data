@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getTasks } from "../services/fakeTasksService";
+import { getTasks, generateTasks } from "../services/fakeTasksService";
 import Table from "./common/table";
 
 const TaskDone = () => {
@@ -19,16 +19,23 @@ const TaskDone = () => {
 
   useEffect(() => {
     setTasks(getTasks());
-  });
+  }, []);
 
-  const getData = () => {
-    let allTasks = tasks;
-    return allTasks.filter((t) => t.completed);
+  const handleClick = () => {
+    console.log("Button Clicked");
+    let allTasks = generateTasks(50);
+    let completedTasks = allTasks.filter((t) => t.completed);
+    setTasks(completedTasks);
   };
 
-  const filteredData = getData();
-
-  return <Table data={filteredData} columns={columns} />;
+  return (
+    <React.Fragment>
+      <button className="btn btn-primary mt-3 mb-3" onClick={handleClick}>
+        Prellenar
+      </button>
+      <Table data={tasks} columns={columns} />
+    </React.Fragment>
+  );
 };
 
 export default TaskDone;
