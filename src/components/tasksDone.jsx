@@ -18,12 +18,17 @@ const TaskDone = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    setTasks(getTasks());
+    setTasks(getTasksCompleted());
   }, []);
 
+  const getTasksCompleted = () => {
+    let allTasks = getTasks();
+    return allTasks.filter((t) => t.completed);
+  };
+
   const handleClick = () => {
-    let allTasks = generateTasks(50);
-    let completedTasks = allTasks.filter((t) => t.completed);
+    generateTasks(50);
+    const completedTasks = getTasksCompleted();
     setTasks(completedTasks);
   };
 
