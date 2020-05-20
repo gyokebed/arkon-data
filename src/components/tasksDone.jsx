@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getTasks, generateTasks } from "../services/fakeTasksService";
 import Table from "./common/table";
+import { useForm } from "react-hook-form";
 
 const TaskDone = () => {
   const columns = [
@@ -16,7 +17,9 @@ const TaskDone = () => {
   ];
 
   const [tasks, setTasks] = useState([]);
-  const [numberOfTasks, setNumberOfTasks] = useState(0);
+  const [numberOfTasks, setNumberOfTasks] = useState(1);
+
+  const { register, handleSubmit, watch, errors } = useForm();
 
   useEffect(() => {
     setTasks(getTasksCompleted());
@@ -27,34 +30,46 @@ const TaskDone = () => {
     return allTasks.filter((t) => t.completed);
   };
 
-  const handleChange = (e) => {
-    setNumberOfTasks(e.target.value);
+  const handleChange = () => {
+    setNumberOfTasks(watch("numberOfTasks"));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = () => {
     generateTasks(numberOfTasks);
     const completedTasks = getTasksCompleted();
     setTasks(completedTasks);
   };
 
-  let button = (
-    <button type="submit" className="btn btn-primary mt-3 mb-3">
-      Prellenar
-    </button>
+  const form = (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <button type="submit" className="btn btn-primary mt-3 mb-3">
+        Prellenar
+      </button>
+      <input
+        className="form-control form-control-sm"
+        type="number"
+        onChange={handleChange}
+        name="numberOfTasks"
+        ref={register({ required: true, min: 1, max: 50 })}
+        defaultValue={numberOfTasks}
+      ></input>
+    </form>
   );
 
   return (
     <React.Fragment>
-      <form onSubmit={handleSubmit}>
-        {tasks.length === 0 ? button : null}
+      {!tasks.length ? form : null}
+      {(numberOfTasks > 0 && numberOfTasks <= 50) || (
+        <div className="alert alert-dark" role="alert">
+          Valor debe de ser entre 1 y 50
+        </div>
+      )}
 
-        <input
-          className="form-control form-control-sm"
-          type="text"
-          onChange={handleChange}
-        ></input>
-      </form>
+      {errors.numberOfTasks && (
+        <div className="alert alert-danger" role="alert">
+          Error: este campo es requerido
+        </div>
+      )}
       <Table data={tasks} columns={columns} />
     </React.Fragment>
   );
