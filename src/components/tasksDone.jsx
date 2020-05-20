@@ -16,6 +16,7 @@ const TaskDone = () => {
   ];
 
   const [tasks, setTasks] = useState([]);
+  const [numberOfTasks, setNumberOfTasks] = useState(0);
 
   useEffect(() => {
     setTasks(getTasksCompleted());
@@ -26,21 +27,34 @@ const TaskDone = () => {
     return allTasks.filter((t) => t.completed);
   };
 
-  const handleClick = () => {
-    generateTasks(50);
+  const handleChange = (e) => {
+    setNumberOfTasks(e.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    generateTasks(numberOfTasks);
     const completedTasks = getTasksCompleted();
     setTasks(completedTasks);
   };
 
   let button = (
-    <button className="btn btn-primary mt-3 mb-3" onClick={handleClick}>
+    <button type="submit" className="btn btn-primary mt-3 mb-3">
       Prellenar
     </button>
   );
 
   return (
     <React.Fragment>
-      {tasks.length === 0 ? button : null}
+      <form onSubmit={handleSubmit}>
+        {tasks.length === 0 ? button : null}
+
+        <input
+          className="form-control form-control-sm"
+          type="text"
+          onChange={handleChange}
+        ></input>
+      </form>
       <Table data={tasks} columns={columns} />
     </React.Fragment>
   );
