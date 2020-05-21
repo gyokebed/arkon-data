@@ -105,7 +105,7 @@ const Tasks = ({ history }) => {
               item={item}
               columns={columns}
               index={index}
-              key={`item-${item.title}`}
+              key={`item-${item._id}`}
               disabled={selectedRange.name !== "Todas"}
             />
           ) : (

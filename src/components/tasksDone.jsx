@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getTasks, generateTasks } from "../services/fakeTasksService";
+import {
+  getTasks,
+  generateTasks,
+  restoreTask,
+} from "../services/fakeTasksService";
 import Table from "./common/table";
 import { useForm } from "react-hook-form";
 
@@ -14,6 +18,17 @@ const TaskDone = () => {
     { path: "mins", label: "Minutos" },
     { path: "secs", label: "Segundos" },
     { path: "elapsedTime", label: "Tiempo en completar la tarea (segundos)" },
+    {
+      key: "restore",
+      content: (item) => (
+        <button
+          onClick={() => handleRestore(item)}
+          className="btn btn-primary btn-sm"
+        >
+          Restaurar
+        </button>
+      ),
+    },
   ];
 
   const [tasks, setTasks] = useState([]);
@@ -24,6 +39,11 @@ const TaskDone = () => {
   useEffect(() => {
     setTasks(getTasksCompleted());
   }, []);
+
+  const handleRestore = (item) => {
+    restoreTask(item);
+    setTasks(getTasksCompleted());
+  };
 
   const getTasksCompleted = () => {
     let allTasks = getTasks();
@@ -61,7 +81,7 @@ const TaskDone = () => {
       {!tasks.length ? form : null}
       {(numberOfTasks > 0 && numberOfTasks <= 50) || (
         <div className="alert alert-dark" role="alert">
-          Valor debe de ser entre 1 y 50
+          Valor debe de estar dentro del rango 1 - 50
         </div>
       )}
 

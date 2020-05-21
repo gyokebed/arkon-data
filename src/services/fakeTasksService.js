@@ -9,7 +9,7 @@ let tasks = [];
 export const generateTasks = (total) => {
   for (let i = 1; i <= total; i++) {
     let task = {
-      _id: `5b21ca3eeb7f6fbccd47131${i}`,
+      _id: +new Date() + i,
       title: `Tarea ${i}`,
       description: `Resolver tarea ${i}`,
       mins: Math.floor(Math.random() * 121),
@@ -93,4 +93,9 @@ export function finishTask(task, elapsedTime) {
   taskInDB.elapsedTime = elapsedTime;
 
   return tasks;
+}
+
+export function restoreTask(task) {
+  let taskInDB = tasks.find((t) => t._id === task._id);
+  taskInDB.completed = false;
 }
