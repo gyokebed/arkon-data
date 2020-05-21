@@ -7,49 +7,13 @@ import {
 } from "../services/fakeTasksService";
 import { getRanges } from "../services/fakeRangeService";
 import ListGroup from "./common/listGroup";
-import TableHeader from "./common/tableHeader";
-import _ from "lodash";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
-import arrayMove from "array-move";
 import ClockContainer from "./timer";
+import TasksTable from "./tasksTable";
 
 const Tasks = ({ history }) => {
   const [tasks, setTasks] = useState(getTasks());
   const [ranges, setRanges] = useState([]);
   const [selectedRange, setSelectedRange] = useState({ name: "Todas" });
-
-  const columns = [
-    {
-      path: "title",
-      label: "Titulo",
-    },
-    { path: "description", label: "Descripción" },
-    { path: "range.name", label: "Rango de duración" },
-    { path: "mins", label: "Minutos" },
-    { path: "secs", label: "Segundos" },
-    {
-      key: "editar",
-      content: (task) => (
-        <button
-          onClick={() => handleEdit(task)}
-          className="btn btn-primary btn-sm"
-        >
-          Editar
-        </button>
-      ),
-    },
-    {
-      key: "delete",
-      content: (task) => (
-        <button
-          onClick={() => handleDelete(task)}
-          className="btn btn-danger btn-sm"
-        >
-          Eliminar
-        </button>
-      ),
-    },
-  ];
 
   useEffect(() => {
     setTasks(getTasks());
@@ -58,16 +22,6 @@ const Tasks = ({ history }) => {
 
   const handleRangeSelect = (range) => {
     setSelectedRange(range);
-  };
-
-  const handleDelete = (task) => {
-    setTasks(tasks.filter((t) => t._id !== task._id));
-
-    deleteTask(task._id);
-  };
-
-  const handleEdit = (task) => {
-    history.push(`/tasks/${task._id}`);
   };
 
   const getData = () => {
@@ -83,61 +37,18 @@ const Tasks = ({ history }) => {
     return filtered;
   };
 
-  const SortableItem = SortableElement(({ item, columns }) => {
-    return (
-      <tr key={item._id}>
-        {columns.map((column) => {
-          return (
-            <td key={createKey(item, column)}>{renderCell(item, column)}</td>
-          );
-        })}
-      </tr>
-    );
-  });
-
-  const SortableList = SortableContainer(({ data, columns }) => {
-    // Returns the task if is not finished or in progress
-    return (
-      <tbody>
-        {data.map((item, index) => {
-          return !item.completed ? (
-            <SortableItem
-              item={item}
-              columns={columns}
-              index={index}
-              key={`item-${item._id}`}
-              disabled={selectedRange.name !== "Todas"}
-            />
-          ) : (
-            ""
-          );
-        })}
-      </tbody>
-    );
-  });
-
-  const renderCell = (item, column) => {
-    if (column.content) return column.content(item);
-
-    return _.get(item, column.path);
+  const handleFinishTask = (items) => {
+    setTasks(items);
   };
+  const handleDelete = (task) => {
+    setTasks(tasks.filter((t) => t._id !== task._id));
 
-  const createKey = (item, column) => {
-    return item._id + (column.path || column.key);
+    deleteTask(task._id);
   };
-
-  const SortableComponent = ({ columns, data }) => {
-    const onSortEnd = ({ oldIndex, newIndex }) => {
-      let itemsCopy = [...data];
-      itemsCopy = arrayMove(itemsCopy, oldIndex, newIndex);
-      setTasks(itemsCopy);
-      reorderTasks(itemsCopy);
-    };
-
-    return <SortableList data={data} columns={columns} onSortEnd={onSortEnd} />;
+  const handleEdit = (task) => {
+    history.push(`/tasks/${task._id}`);
   };
-
-  const onFinishTask = (items) => {
+  const handleSetTasks = (items) => {
     setTasks(items);
   };
 
@@ -156,7 +67,10 @@ const Tasks = ({ history }) => {
         </div>
         <div className="col-sm-9 mt-3 mb-3">
           {filteredData.length > 0 ? (
-            <ClockContainer data={filteredData} setOnFinish={onFinishTask} />
+            <ClockContainer
+              data={filteredData}
+              onFinishTask={handleFinishTask}
+            />
           ) : (
             ""
           )}
@@ -168,12 +82,13 @@ const Tasks = ({ history }) => {
           >
             Agregar Tarea
           </Link>
-          <div className="table-responsive">
-            <table className="table">
-              <TableHeader columns={columns} />
-              <SortableComponent columns={columns} data={filteredData} />
-            </table>
-          </div>
+          <TasksTable
+            tasks={filteredData}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+            selectedRange={selectedRange}
+            onSetTasks={handleSetTasks}
+          />
         </div>
       </div>
     </React.Fragment>

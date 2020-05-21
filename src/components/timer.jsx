@@ -85,7 +85,7 @@ class ClockContainer extends React.Component {
   };
 
   onFinish = () => {
-    this.props.setOnFinish([
+    this.props.onFinishTask([
       ...finishTask(this.props.data[0], this.stopClock()),
     ]);
   };
