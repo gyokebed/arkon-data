@@ -3,7 +3,7 @@ import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import SortableBody from "./sortableBody";
 
-const Table = ({ columns, data, sortable, selectedRange, onSetTasks }) => {
+const Table = ({ columns, data, sortable, selectedRange, onSetData }) => {
   return (
     <div className="table-responsive">
       <table className="table">
@@ -13,7 +13,7 @@ const Table = ({ columns, data, sortable, selectedRange, onSetTasks }) => {
             data={data}
             columns={columns}
             selectedRange={selectedRange}
-            onSetTasks={onSetTasks}
+            onSetData={onSetData}
           />
         ) : (
           <TableBody data={data} columns={columns} />

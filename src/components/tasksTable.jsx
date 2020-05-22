@@ -38,7 +38,7 @@ const TasksTable = ({ tasks, onDelete, onEdit, selectedRange, onSetTasks }) => {
       data={tasks}
       sortable={true}
       selectedRange={selectedRange}
-      onSetTasks={onSetTasks}
+      onSetData={onSetTasks}
     />
   );
 };
