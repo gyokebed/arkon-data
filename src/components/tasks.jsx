@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  getTasks,
-  deleteTask,
-  reorderTasks,
-} from "../services/fakeTasksService";
+import { getTasks, deleteTask } from "../services/fakeTasksService";
 import { getRanges } from "../services/fakeRangeService";
 import ListGroup from "./common/listGroup";
 import ClockContainer from "./timer";

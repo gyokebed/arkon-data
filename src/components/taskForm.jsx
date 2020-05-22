@@ -42,6 +42,19 @@ const TaskForm = ({ match, history }) => {
     return error ? error.details[0].message : null;
   };
 
+  useEffect(() => {
+    const taskId = match.params.id;
+    if (taskId === "new" || taskId === "done" || taskId === "chart") return;
+
+    const ranges = getRanges();
+    setRanges(ranges);
+
+    const task = getTask(taskId);
+    if (!task) return history.replace("/not-found");
+
+    setData(mapToViewModel(task));
+  }, [match.params.id, history]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -98,19 +111,6 @@ const TaskForm = ({ match, history }) => {
       />
     );
   };
-
-  useEffect(() => {
-    const ranges = getRanges();
-    setRanges(ranges);
-
-    const taskId = match.params.id;
-    if (taskId === "new" || taskId === "done" || taskId === "chart") return;
-
-    const task = getTask(taskId);
-    if (!task) return history.replace("/not-found");
-
-    setData(mapToViewModel(task));
-  }, []);
 
   const mapToViewModel = (task) => {
     return {
